@@ -1,6 +1,7 @@
 package com.deveduardo.controle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.deveduardo.controle.util.ManipulacaoData;
-
-import modelo.Usuario;
+import com.deveduardo.dao.UsuarioDAO;
+import com.deveduardo.modelo.Usuario;
 
 @WebServlet("/publica")
 public class indexControle extends HttpServlet {
@@ -65,7 +66,7 @@ public class indexControle extends HttpServlet {
 	}
 
 	private void gravarUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
+			throws ServletException, IOException, SQLException {		
 		
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
@@ -81,6 +82,12 @@ public class indexControle extends HttpServlet {
 		Usuario usuario = new Usuario(nome, cpf, dataNascimento, email, password, login, false);
 		
 		System.out.println(usuario);
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		usuarioDAO.inserirUsuario(usuario);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("publica/publica-novo-usuario.jsp");
+		request.setAttribute("mensagem", "Usuario cadastrado com sucesso");
+		dispatcher.forward(request, response);
 	}
 
 }

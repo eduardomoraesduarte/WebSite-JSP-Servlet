@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Conexão com o Banco de Dados -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/website?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">123456</property>
+        
+        <!-- Dialeto do Banco de Dados -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Configuração de Esquema -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Configuração de Log -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Adicionar Classes Mapeadas -->
+        <mapping class="com.deveduardo.modelo.Usuario"/>
+    </session-factory>
+</hibernate-configuration>

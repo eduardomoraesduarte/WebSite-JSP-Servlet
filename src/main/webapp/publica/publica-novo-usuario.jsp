@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +22,15 @@
 		<div class="row">
 			<div class="col">
 				<h2>Cadastro usuário</h2>
+				
+				<c:if test="${mensagem != null}">
+				 	<div class="alert alert-success alert-dismissible fade show">
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+					<span><c:out value="${mensagem}" /></span>
+				</div>
+				</c:if>
+				
+				
 				<form
 					action="${pageContext.request.contextPath}/publica?acao=inserir"
 					method="post">
