@@ -15,6 +15,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/publica?acao=novo">Novo usuário</a>
+          </li>     
+           <li class="nav-item">
+          <a class="nav-link" href="${pageContext.request.contextPath}/auth/admin?acao=listar">Usuários</a>
         </li>     
       </ul>     
     </div>
