@@ -47,6 +47,30 @@ public class UsuarioDAO {
             em.close();
         }
     }
+
+	public void apagarUsuario(Long id) {
+		  EntityManager em = emf.createEntityManager();
+	        EntityTransaction tx = em.getTransaction();
+		
+	        try {
+	            tx.begin();
+	            Usuario usuario = em.find(Usuario.class, id);
+	            if (usuario != null) {
+	                em.remove(usuario);
+	            }
+	            tx.commit();
+	        } catch (Exception e) {
+	            if (tx.isActive()) {
+	                tx.rollback();
+	            }
+	            throw e; // Re-throw the exception to be handled by the caller
+	        } finally {
+	            em.close();
+	        }
+			
+	        
+	     
+	}
 }
 	
 	
