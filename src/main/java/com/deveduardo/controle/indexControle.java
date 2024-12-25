@@ -1,6 +1,7 @@
 package com.deveduardo.controle;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.deveduardo.controle.seguranca.Criptografia;
 import com.deveduardo.controle.util.ManipulacaoData;
 import com.deveduardo.dao.UsuarioDAO;
 import com.deveduardo.modelo.Usuario;
@@ -66,7 +68,7 @@ public class indexControle extends HttpServlet {
 	}
 
 	private void gravarUsuario(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, SQLException {		
+			throws ServletException, IOException, SQLException, NoSuchAlgorithmException {		
 		
 		String nome = request.getParameter("nome");
 		String cpf = request.getParameter("cpf");
@@ -79,7 +81,9 @@ public class indexControle extends HttpServlet {
 		ManipulacaoData manipulacaoData = new ManipulacaoData();
 		Date dataNascimento = manipulacaoData.converterStringData(data);
 		
-		Usuario usuario = new Usuario(nome, cpf, dataNascimento, email, password, login, false);
+		String senhaCriptografada = Criptografia.converterParaMD5(password);
+		
+		Usuario usuario = new Usuario(nome, cpf, dataNascimento, email, senhaCriptografada, login, false);
 		
 		System.out.println(usuario);
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
