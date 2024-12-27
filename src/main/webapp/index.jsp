@@ -18,9 +18,12 @@
 	<jsp:include page="/publica/publica-nav.jsp"></jsp:include>
 	<div class="container">
 		<div class="row">
-			<div class="col">
-				<h2>Index</h2>
-			</div>
+			<div class="text-center"> 
+  <img src="${pageContext.request.contextPath}/resources/images/home.jpg" 
+       alt="Feliz Ano Novo" 
+       class="img-fluid" 
+       style="max-width: 700px;" />
+</div>
 		</div>
 
 	</div>
